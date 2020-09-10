@@ -1,0 +1,17 @@
+.input-block {
+  & {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  label {
+    margin-bottom: .5rem;
+    font-size: 2rem;
+  }
+  
+  input {
+    padding: 1rem;
+    border-radius: .5rem;
+  }
+}

@@ -1,0 +1,61 @@
+#base {
+  & {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .logo {
+    height: 7rem;
+    margin-bottom: 2rem;
+  }
+
+  .container {
+    background-color: var(--color-background-secundary);
+    padding: 3rem 5rem;
+    border-radius: 1rem;
+    justify-content: center;
+  }
+
+  form {
+    & {
+      display: flex;
+      width: 100%;
+      max-width: 450px;
+      margin: auto;
+      justify-content: center;
+    }
+
+    fieldset {
+      width: 100%;
+      font-weight: bold;
+    }
+
+    legend {
+      font-size: 4rem;
+      text-align: center;
+    }
+
+    legend + .input-block,
+    .input-block + button {
+      margin-top: 3.5rem;
+    }
+
+    .input-block {
+      margin: 3rem 0;
+    }
+
+    button {
+      display: block;
+      margin: auto;
+    }
+
+    .switch-form {
+      margin-top: 1rem;
+      background: none;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+  }
+}
