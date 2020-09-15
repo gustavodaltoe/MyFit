@@ -1,0 +1,9 @@
+.inline-block {
+    width: 199px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .input {
+        width: 40%;
+    }
+}

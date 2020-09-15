@@ -1,0 +1,22 @@
+.btn-white {
+    & {
+        background: #E1E1E1;
+        padding: 1.2rem;
+        width: 26rem;
+        border-radius: .5rem;
+        font-size: 2.2rem;
+        transition: .2s ease;
+        cursor: pointer;
+    }
+    & {
+        font-weight: bold;
+        font-size: 22px;
+        line-height: 26px;
+
+        color: #090E11;
+    }
+    &:hover {
+        background-color: #6e6d6e;
+        color: #E1E1E1;
+    }
+}

@@ -1,0 +1,54 @@
+strong,
+span {
+    height: 26px;
+    font-size: 22px;
+    line-height: 26px;
+}
+
+button {
+    margin: auto;
+    display: block;
+}
+
+.profile-results {
+    strong {
+        left: 475px;
+        font-weight: bold;
+    }
+    span {
+        float: right;
+        text-align: right;
+        font-weight: normal;
+    }
+    display: block;
+}
+
+.side-by-side {
+    display: flex;
+    text-align: center;
+
+    strong {
+        font-weight: bold;
+        display: block;
+    }
+    span {
+        font-weight: 300;
+        display: block;
+    }
+}
+
+.side-by-side > div {
+    flex: 1;
+}
+
+#font-red {
+    color: var(--color-orange);
+}
+
+#font-blue {
+    color: var(--color-blue);
+}
+
+#font-yellow {
+    color: var(--color-yellow);
+}

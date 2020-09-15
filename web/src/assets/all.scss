@@ -85,6 +85,18 @@ form fieldset {
   border: 0;
 }
 
+fieldset {
+  border: 0;
+}
+
+legend {
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 42px;
+  text-align: center;
+  color: #FFFFFF;
+}
+
 .container {
   width: 90vw;
   max-width: 700px;
