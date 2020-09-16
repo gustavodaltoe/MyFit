@@ -6,12 +6,12 @@ import './styles.scss';
 function Confirmation() {
   return (
     <Base>
-      <fieldset>
-        <legend>Aguardando confirmação de cadastro por email.</legend>
+      <div id="confirmation">
+        <h1>Aguardando confirmação de cadastro por email.</h1>
         <button type="submit" className="btn-white">
           Tentar novamente
         </button>
-      </fieldset>
+      </div>
     </Base>
   );
 }
