@@ -10,7 +10,7 @@ type Inputs = {
 };
 
 function Login() {
-  const { register, handleSubmit, watch, errors } = useForm<Inputs>();
+  const { register, handleSubmit, errors } = useForm<Inputs>();
 
   const onSubmit = (data: Inputs) => {
     console.log(data);
@@ -23,8 +23,19 @@ function Login() {
       <form id="login" onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           <legend>Acessar</legend>
-          <Input name="email" label="Email" ref={register} />
-          <Input name="password" type="password" label="Senha" ref={register} />
+          <Input
+            name="email"
+            label="Email"
+            ref={register({ required: true })}
+            className={errors.password ? 'error' : ''}
+          />
+          <Input
+            name="password"
+            type="password"
+            label="Senha"
+            ref={register({ required: true })}
+            className={errors.password ? 'error' : ''}
+          />
           <button type="submit" className="btn-green">
             Acessar
           </button>
