@@ -112,6 +112,7 @@ legend {
     font-size: 2.2rem;
     transition: .2s ease;
     cursor: pointer;
+    max-width: 100%;
   }
   &:hover {
     background-color: var(--color-green-dark);
