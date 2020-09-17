@@ -4,6 +4,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    margin: 4rem 0;
   }
 
   .logo {
@@ -42,8 +43,9 @@
       margin-top: 3.5rem;
     }
 
-    .input-block {
-      margin: 3rem 0;
+    .input-block,
+    .select-block {
+      margin: 0 0 3rem 0;
     }
 
     button {

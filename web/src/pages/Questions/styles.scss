@@ -1,9 +1,16 @@
-.inline-block {
-    width: 199px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    .input {
-        width: 40%;
+#questions {
+    & {
+        padding: 2rem 0;
+    }
+    .input-group {
+        & {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .input-block,
+        .select-block {
+            width: 47%;
+        }
     }
 }

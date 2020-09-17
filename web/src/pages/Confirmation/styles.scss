@@ -15,12 +15,13 @@
 			transition: .2s ease;
 			cursor: pointer;
 			margin-top: 3rem;
-		}
-		& {
 			font-weight: bold;
 			font-size: 22px;
 			line-height: 26px;
 			color: #090E11;
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
 		}
 		&:hover {
 			background-color: #6e6d6e;
