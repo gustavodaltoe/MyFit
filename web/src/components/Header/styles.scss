@@ -1,0 +1,26 @@
+.app-header {
+    align-items: center;
+    background: var(--color-background-secundary);
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+    padding-bottom: 10px;
+    width: 100%;
+}
+
+.logo {
+    height: 96px;
+    width: 184px;
+}
+
+.icon {
+    padding-top: 5px;
+    width: 58px;
+    height: 92px;
+    color: #E1E1E1;
+    cursor: pointer;
+
+    &:hover {
+        color: #6e6d6e;
+    }
+}
