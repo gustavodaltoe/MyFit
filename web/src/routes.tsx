@@ -5,6 +5,7 @@ import Register from './pages/Register';
 import Confirmation from './pages/Confirmation';
 import Questions from './pages/Questions';
 import Results from './pages/Results';
+import Principal from './pages/Principal';
 
 function Routes() {
   return (
@@ -15,6 +16,7 @@ function Routes() {
       <Route path="/confirmation" component={Confirmation} />
       <Route path="/questions" component={Questions} />
       <Route path="/results" component={Results} />
+      <Route path="/principal" component={Principal} />
     </BrowserRouter>
   );
 }
