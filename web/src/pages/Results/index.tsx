@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
+import { FaFire, FaEgg, FaTint, FaBurn } from 'react-icons/fa';
 import Base from '../../components/Base';
 
 import './styles.scss';
@@ -11,22 +12,34 @@ function Results() {
         <h1>Resultados</h1>
         <div className="profile-results">
           <div>
-            <strong>Taxa metábólica basal:</strong>
+            <strong>
+              <FaFire className="fa" />
+              Taxa metábólica basal:
+            </strong>
             <span>1791 kcal</span>
           </div>
 
           <div>
-            <strong>Índice massa corporal:</strong>
+            <strong>
+              <FaEgg className="fa" />
+              Índice massa corporal:
+            </strong>
             <span>29.41</span>
           </div>
 
           <div>
-            <strong>Requisitos de água:</strong>
+            <strong>
+              <FaTint className="fa" />
+              Requisitos de água:
+            </strong>
             <span>2750 ml</span>
           </div>
 
           <div>
-            <strong>Requisitos calóricos diários:</strong>
+            <strong>
+              <FaBurn className="fa" />
+              Requisitos calóricos diários:
+            </strong>
             <span>1970 kcal</span>
           </div>
         </div>
