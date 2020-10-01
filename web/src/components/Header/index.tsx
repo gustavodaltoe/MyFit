@@ -5,14 +5,10 @@ import './styles.scss';
 
 import Logo from '../../assets/logo.svg';
 
-interface HeaderProps {
-  hideLogo?: boolean;
-}
-
-const Header: React.FC<HeaderProps> = ({ hideLogo }) => {
+const Header = () => {
   return (
     <header className="app-header">
-      {!hideLogo && <img srcSet={Logo} className="logo" alt="MyFit logo" />}
+      <img srcSet={Logo} className="logo" alt="MyFit logo" />
       <FaUser className="icon" />
     </header>
   );

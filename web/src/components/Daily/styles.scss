@@ -1,0 +1,111 @@
+#daily {
+  & {
+    background-color: var(--color-background-secundary);
+    border-radius: 1rem;
+    justify-content: center;
+    max-width: 60rem;
+    margin: auto;
+    margin-top: 4rem;
+  }
+
+  & > * {
+    padding: 1rem;
+  }
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .red {
+    color: var(--color-red);
+  }
+  .blue {
+    color: var(--color-blue);
+  }
+  .yellow {
+    color: var(--color-yellow);
+  }
+
+  header {
+    & {
+      background-color: var(--color-background-secundary-dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 3rem;
+      padding: 1.5rem 0;
+    }
+    &:first-of-type {
+      border-top-right-radius: 1rem;
+      border-top-left-radius: 1rem;
+    }
+    h4 {
+      margin: 0 5rem;
+      font-size: 2.5rem;
+    }
+    button {
+      background: transparent;
+      cursor: pointer;
+    }
+  }
+  .period {
+    & {
+      justify-content: flex-start;
+      padding: 1.5rem;
+    }
+
+    button {
+      color: var(--color-orange);
+      font-size: 3.6rem;
+    }
+    
+    span,
+    b {
+      font-size: 1.8rem;
+    }
+
+    span {
+      margin-left: 1rem;
+      font-weight: 400;
+    }
+
+    b {
+      margin-left: auto;
+    }
+  }
+
+  .resume {
+    & {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem 4rem;
+    }
+    .macros {
+      & {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+      }
+      & > div {
+        & {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          width: 9rem;
+        }
+        p {
+          font-weight: 400;
+        }
+      }
+    }
+  }
+
+  .progress {
+    width: 100%;
+    text-align: center;
+    margin: 2rem 0 1rem;
+  }
+}

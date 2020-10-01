@@ -1,22 +1,17 @@
 import React from 'react';
-import {
-  FaPlusCircle,
-  FaChevronLeft,
-  FaChevronRight,
-  FaTimes,
-} from 'react-icons/fa';
+import Daily from '../../components/Daily';
 import Header from '../../components/Header';
 
 import './styles.scss';
 
 function Principal() {
   return (
-    <>
+    <main id="principal">
       <Header />
-      <body>
-        <strong>teste</strong>
-      </body>
-    </>
+      <div className="container">
+        <Daily />
+      </div>
+    </main>
   );
 }
 

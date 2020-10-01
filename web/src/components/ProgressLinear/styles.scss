@@ -1,0 +1,12 @@
+.bar {
+  width: 100%;
+  background-color: #4D5356;
+  border-radius: .5rem;
+  height: 1rem;
+
+  .fill {
+    background-color: var(--color-blue);
+    height: 100%;
+    border-radius: inherit;
+  }
+}
