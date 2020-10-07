@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './styles.scss';
-import {
-  FaPlusCircle,
-  FaChevronLeft,
-  FaChevronRight,
-  FaTimes,
-} from 'react-icons/fa';
+import { FaPlusCircle, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import ProgressLinear from '../ProgressLinear';
 import FoodList from '../FoodList';
+import Modal from '../Modal';
 
 const Daily = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleFoodAddButtonClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleFoodModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <section id="daily">
       <header>
@@ -44,7 +50,7 @@ const Daily = () => {
       </div>
 
       <header className="period">
-        <button type="button">
+        <button type="button" onClick={handleFoodAddButtonClick}>
           <FaPlusCircle />
         </button>
         <span>Café da manhã</span>
@@ -55,7 +61,7 @@ const Daily = () => {
       </div>
 
       <header className="period">
-        <button type="button">
+        <button type="button" onClick={handleFoodAddButtonClick}>
           <FaPlusCircle />
         </button>
         <span>Almoço</span>
@@ -66,7 +72,7 @@ const Daily = () => {
       </div>
 
       <header className="period">
-        <button type="button">
+        <button type="button" onClick={handleFoodAddButtonClick}>
           <FaPlusCircle />
         </button>
         <span>Janta</span>
@@ -77,7 +83,7 @@ const Daily = () => {
       </div>
 
       <header className="period">
-        <button type="button">
+        <button type="button" onClick={handleFoodAddButtonClick}>
           <FaPlusCircle />
         </button>
         <span>Lanches</span>
@@ -86,6 +92,8 @@ const Daily = () => {
       <div className="entry">
         <FoodList />
       </div>
+
+      <Modal isOpen={isModalOpen} handleClose={handleFoodModalClose} />
     </section>
   );
 };
