@@ -8,7 +8,7 @@ import {
   FaTimes,
 } from 'react-icons/fa';
 import ProgressLinear from '../ProgressLinear';
-import Food from '../Food';
+import FoodList from '../FoodList';
 
 const Daily = () => {
   return (
@@ -51,7 +51,7 @@ const Daily = () => {
         <b>536kcal</b>
       </header>
       <div className="entry">
-        <Food />
+        <FoodList />
       </div>
 
       <header className="period">
@@ -62,7 +62,7 @@ const Daily = () => {
         <b>536kcal</b>
       </header>
       <div className="entry">
-        <Food />
+        <FoodList />
       </div>
 
       <header className="period">
@@ -73,7 +73,7 @@ const Daily = () => {
         <b>536kcal</b>
       </header>
       <div className="entry">
-        <Food />
+        <FoodList />
       </div>
 
       <header className="period">
@@ -84,7 +84,7 @@ const Daily = () => {
         <b>536kcal</b>
       </header>
       <div className="entry">
-        <Food />
+        <FoodList />
       </div>
     </section>
   );
