@@ -1,0 +1,48 @@
+.food-item {
+  & {
+      display: flex;
+      justify-content: space-between;
+      font-weight: regular;
+      border-bottom: 1px solid var(--color-background-secundary-dark);
+      padding: 1rem;
+  }
+  &:last-child {
+      border: 0;
+  }
+  & > div {
+      display: flex;
+      flex-direction: column;
+
+      strong {
+          font-size: 2rem;
+          font-weight: normal;
+      }
+      .macros {
+          span {
+              & {
+                  font-weight: regular;
+                  color: var(--color-text-gray);
+                  margin-right: 1rem;
+                  font-size: 1.4rem;
+              }
+      
+              &:last-child {
+                  margin-right: 0;
+              }
+          }
+          em {
+              font-style: normal;
+          }
+      }
+  }
+  .description {
+      font-weight: regular;
+      color: var(--color-text-gray);
+      font-size: 1.4rem;
+  }
+  .calories {
+      text-align: right;
+      font-size: 2rem;
+      color: var(--color-blue);
+  }
+}

@@ -1,6 +1,6 @@
 import React, { memo, useCallback, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import FoodList from '../FoodList';
+import FoodItem from '../FoodItem';
 
 import './styles.scss';
 
@@ -11,6 +11,7 @@ interface IProps {
 
 const Modal: React.FC<IProps> = memo((props: IProps) => {
   const [quantity, setQuantity] = useState(1);
+  const [item, setItem] = useState<number | null>(null);
   const handleCloseClick = useCallback(() => props.handleClose(), [props]);
 
   function handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -32,7 +33,44 @@ const Modal: React.FC<IProps> = memo((props: IProps) => {
           <h3>Adicionar alimento</h3>
         </header>
         <section className="content">
-          <FoodList />
+          <div className="food-list">
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button
+              type="button"
+              className={`select-food ${1 === 1 ? 'selected' : ''}`}
+            >
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+          </div>
         </section>
         <footer>
           <div>
@@ -46,7 +84,9 @@ const Modal: React.FC<IProps> = memo((props: IProps) => {
             <span>Unidades</span>
           </div>
           <div>
-            <button type="button">Adicionar</button>
+            <button type="button" className="add">
+              Adicionar
+            </button>
             <button type="button" onClick={handleCloseClick}>
               Fechar
             </button>

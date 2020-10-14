@@ -21,18 +21,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
 
-html, body, #root {
-  min-height: 100vh;
-}
-
-body {
-  background: var(--color-background);
-}
-
-body,
-ul {
   &::-webkit-scrollbar-track
   {
     background-color: #393E41;
@@ -48,6 +37,14 @@ ul {
   {
     background-color: #C4C4C4;
   }
+}
+
+html, body, #root {
+  min-height: 100vh;
+}
+
+body {
+  background: var(--color-background);
 }
 
 #root {

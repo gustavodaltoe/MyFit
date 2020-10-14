@@ -9,7 +9,7 @@
     margin-bottom: 4rem;
   }
 
-  button {
+  & > button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -54,6 +54,9 @@
     }
 
     button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
       color: var(--color-orange);
       font-size: 3.6rem;
     }
