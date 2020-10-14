@@ -54,6 +54,7 @@
         width: 6rem;
         padding: .5rem 1rem;
         margin-right: 1rem;
+        border-radius: .5rem;
       }
 
       & > div {
@@ -66,7 +67,13 @@
         width: 9rem;
         color: #fff;
         background: red;
+        border-radius: .5rem;
+        height: 3rem;
         cursor: pointer;
+
+        &:hover {
+          background: var(--color-green-dark);
+        }
       }
     }
   }

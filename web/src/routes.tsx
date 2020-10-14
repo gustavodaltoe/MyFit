@@ -6,6 +6,7 @@ import Confirmation from './pages/Confirmation';
 import Questions from './pages/Questions';
 import Results from './pages/Results';
 import Principal from './pages/Principal';
+import Foods from './pages/Foods';
 
 function Routes() {
   return (
@@ -17,6 +18,7 @@ function Routes() {
       <Route path="/questions" component={Questions} />
       <Route path="/results" component={Results} />
       <Route path="/principal" component={Principal} />
+      <Route path="/foods" component={Foods} />
     </BrowserRouter>
   );
 }

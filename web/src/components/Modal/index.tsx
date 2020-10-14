@@ -1,5 +1,4 @@
-import React, { memo, useCallback } from 'react';
-
+import React, { memo, useCallback, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
 import FoodList from '../FoodList';
 
@@ -11,7 +10,18 @@ interface IProps {
 }
 
 const Modal: React.FC<IProps> = memo((props: IProps) => {
+  const [quantity, setQuantity] = useState(1);
   const handleCloseClick = useCallback(() => props.handleClose(), [props]);
+
+  function handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
+    let amount = parseInt(e.target.value, 10);
+
+    if (amount < 1) {
+      amount = 1;
+    }
+    setQuantity(amount);
+  }
+
   return (
     <section className={`modal ${props.isOpen ? 'active' : ''}`}>
       <div className="container">
@@ -26,7 +36,13 @@ const Modal: React.FC<IProps> = memo((props: IProps) => {
         </section>
         <footer>
           <div>
-            <input type="number" value={0} />
+            <input
+              type="number"
+              value={quantity}
+              onChange={
+                handleAmountChange /* (e) => setQuantity(e.target.value) */
+              }
+            />
             <span>Unidades</span>
           </div>
           <div>
