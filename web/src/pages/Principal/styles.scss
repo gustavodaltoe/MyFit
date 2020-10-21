@@ -3,4 +3,72 @@
   min-height: 100vh;
   justify-content: center;
   align-items: center;
+
+  .modal {
+    .content {
+      flex: 1;
+      max-height: 37rem;
+      overflow: auto;
+    }
+
+    .food-list {
+      .select-food {
+        width: 100%;
+        color: inherit;
+        display: block;
+        background: none;
+        cursor: pointer;
+
+        &:focus {
+          outline: none;
+        }
+
+        &.selected {
+          background-color: var(--color-background-secundary-dark);
+        }
+      }
+    }
+
+    footer {
+      & {
+        border-bottom-left-radius: 2rem;
+        border-bottom-right-radius: 2rem;
+        background: var(--color-background-secundary-dark);
+        padding: 2rem;
+  
+        display: flex;
+        justify-content: space-between;
+      }
+
+      input {
+        width: 6rem;
+        padding: .5rem 1rem;
+        margin-right: 1rem;
+        border-radius: .5rem;
+      }
+
+      & > div {
+        display: flex;
+        align-items: center;
+      }
+
+      button {
+        margin: 0 1rem;
+        width: 9rem;
+        color: #fff;
+        background: red;
+        border-radius: .5rem;
+        height: 3rem;
+        cursor: pointer;
+
+        &.add {
+          background-color: var(--color-green);
+        }
+
+        &:hover {
+          background: var(--color-green-dark);
+        }
+      }
+    }
+  }
 }

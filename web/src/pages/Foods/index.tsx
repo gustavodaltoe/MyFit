@@ -1,12 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FaPlusCircle, FaTrash } from 'react-icons/fa';
 import FoodItem from '../../components/FoodItem';
 import FoodList from '../../components/FoodList';
 import Header from '../../components/Header';
+import Modal from '../../components/Modal';
 
 import './styles.scss';
 
 function Foods() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleFoodAddButtonClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleFoodModalClose = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <main id="foods">
       <Header />
@@ -48,9 +59,15 @@ function Foods() {
         </div>
       </section>
 
-      <button type="button" id="open-add-food">
+      <button type="button" onClick={handleFoodAddButtonClick}>
         <FaPlusCircle size={60} />
       </button>
+
+      <Modal
+        title="Novo Alimento"
+        isOpen={isModalOpen}
+        handleClose={handleFoodModalClose}
+      />
     </main>
   );
 }

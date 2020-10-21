@@ -5,8 +5,11 @@ import { FaPlusCircle, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import ProgressLinear from '../ProgressLinear';
 import FoodList from '../FoodList';
 import Modal from '../Modal';
+import FoodItem from '../FoodItem';
 
 const Daily = () => {
+  const [quantity, setQuantity] = useState(1);
+  const [item, setItem] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleFoodAddButtonClick = () => {
@@ -16,6 +19,15 @@ const Daily = () => {
   const handleFoodModalClose = () => {
     setIsModalOpen(false);
   };
+
+  function handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
+    let amount = parseInt(e.target.value, 10);
+
+    if (amount < 1) {
+      amount = 1;
+    }
+    setQuantity(amount);
+  }
 
   return (
     <section id="daily">
@@ -93,7 +105,72 @@ const Daily = () => {
         <FoodList />
       </div>
 
-      <Modal isOpen={isModalOpen} handleClose={handleFoodModalClose} />
+      <Modal
+        title="Adicionar Alimento"
+        isOpen={isModalOpen}
+        handleClose={handleFoodModalClose}
+      >
+        <section className="content">
+          <div className="food-list">
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button
+              type="button"
+              className={`select-food ${1 === 1 ? 'selected' : ''}`}
+            >
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+            <button type="button" className="select-food">
+              <FoodItem />
+            </button>
+          </div>
+        </section>
+        <footer>
+          <div>
+            <input
+              type="number"
+              value={quantity}
+              onChange={
+                handleAmountChange /* (e) => setQuantity(e.target.value) */
+              }
+            />
+            <span>Unidades</span>
+          </div>
+          <div>
+            <button type="button" className="add">
+              Adicionar
+            </button>
+            <button type="button" onClick={handleFoodModalClose}>
+              Fechar
+            </button>
+          </div>
+        </footer>
+      </Modal>
     </section>
   );
 };
