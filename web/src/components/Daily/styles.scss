@@ -98,4 +98,12 @@
     text-align: center;
     margin: 2rem 0 1rem;
   }
+
+  .icon {
+    position: absolute;
+    right: 5rem;
+    top: 2rem;
+    color: var(--color-orange);
+    font-size: 3rem;
+  }
 }

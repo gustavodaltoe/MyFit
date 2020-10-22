@@ -6,6 +6,7 @@ import ProgressLinear from '../ProgressLinear';
 import FoodList from '../FoodList';
 import Modal from '../Modal';
 import FoodItem from '../FoodItem';
+import { Link } from 'react-router-dom';
 
 const Daily = () => {
   const [quantity, setQuantity] = useState(1);
@@ -110,6 +111,9 @@ const Daily = () => {
         isOpen={isModalOpen}
         handleClose={handleFoodModalClose}
       >
+        <Link to="/foods">
+          <FaPlusCircle className="icon" />
+        </Link>
         <section className="content">
           <div className="food-list">
             <button type="button" className="select-food">
