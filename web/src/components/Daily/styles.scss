@@ -15,16 +15,6 @@
     justify-content: center;
   }
 
-  .red {
-    color: var(--color-red);
-  }
-  .blue {
-    color: var(--color-blue);
-  }
-  .yellow {
-    color: var(--color-yellow);
-  }
-
   & > header {
     & {
       background-color: var(--color-background-secundary-dark);

@@ -1,0 +1,46 @@
+.new-food-form {
+  form {
+    & {
+      padding: 2rem 4rem;
+      background: var(--color-background-secundary);
+    }
+  
+    .input-block {
+      margin: 2rem 0;
+    }
+  
+    .input-group {
+      & {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .input-block,
+      .select-block {
+        width: 47%;
+      }
+    }
+  }
+
+}
+
+.new-food-footer {
+  & {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1;
+    padding: 1rem;
+  }
+  button {
+    margin: 0 1.5rem;
+    cursor: pointer;
+  }
+  .btn-back {
+    background: none;
+  }
+  .btn-green {
+    padding: 1rem;
+    width: 19rem;
+  }
+}

@@ -23,16 +23,6 @@
       justify-content: center;
     }
 
-    .red {
-      color: var(--color-red);
-    }
-    .blue {
-      color: var(--color-blue);
-    }
-    .yellow {
-      color: var(--color-yellow);
-    }
-
     header {
       & {
         background-color: var(--color-background-secundary-dark);
@@ -92,5 +82,39 @@
     color: var(--color-orange);
     cursor: pointer;
     outline: none;
+  }
+
+  .modal {
+    .container {
+      background: var(--color-background-secundary-dark);
+    }
+    section {
+      & {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        max-height: 37rem;
+        overflow: auto;
+      }
+      & > button {
+        background: var(--color-background-secundary-dark);
+        padding: 2rem;
+        cursor: pointer;
+        transition: background .2s;
+        flex: 1;
+        outline: transparent;
+        font-size: 3rem;
+
+        &:hover {
+          background: var(--color-background-secundary);
+        }
+
+        span {
+          display: block;
+          max-width: 60rem;
+          margin: auto;
+        }
+      }
+    }
   }
 }
