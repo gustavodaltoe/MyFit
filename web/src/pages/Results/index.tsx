@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React from 'react';
 import { FaFire, FaEgg, FaTint, FaBurn } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import Base from '../../components/Base';
 
 import './styles.scss';
@@ -62,9 +63,9 @@ function Results() {
           </div>
         </div>
 
-        <button type="button" className="btn-green">
+        <Link className="btn-green" to="/principal">
           Continuar
-        </button>
+        </Link>
       </div>
     </Base>
   );
