@@ -17,7 +17,7 @@
       margin-bottom: 4rem;
     }
 
-    button {
+    & > button {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -47,24 +47,6 @@
       cursor: pointer;
       position: relative;
       overflow: hidden;
-
-      & > button {
-        cursor: pointer;
-        position: absolute;
-        right: -6rem;
-        top: 0;
-        bottom: 0;
-        width: 6rem;
-        outline: none;
-        background: linear-gradient(90deg, rgba(255,255,255,0) 0%, var(--color-background-secundary-dark) 30%);
-
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        padding: 1rem;
-
-        transition: all .3s;
-      }
 
       &:hover {
         & > button {

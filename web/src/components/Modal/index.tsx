@@ -1,6 +1,5 @@
 import React, { memo, useCallback, useState } from 'react';
 import { FaTimes } from 'react-icons/fa';
-import FoodItem from '../FoodItem';
 
 import './styles.scss';
 

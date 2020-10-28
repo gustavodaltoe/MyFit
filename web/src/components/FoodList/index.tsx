@@ -1,43 +1,39 @@
 import React from 'react';
-import { FaTrash } from 'react-icons/fa';
 import FoodItem from '../FoodItem';
+import FoodSideDeleteButton from '../FoodSideDeleteButton';
 
 import './styles.scss';
 
 const FoodList = () => {
+  function handleDelete() {
+    // setIsModalOpen(!isModalOpen);
+  }
+
   return (
-    <section className="food-list">
-      <div className="food-container">
-        <FoodItem />
-        <button type="button">
-          <FaTrash />
-        </button>
-      </div>
-      <div className="food-container">
-        <FoodItem />
-        <button type="button">
-          <FaTrash />
-        </button>
-      </div>
-      <div className="food-container">
-        <FoodItem />
-        <button type="button">
-          <FaTrash />
-        </button>
-      </div>
-      <div className="food-container">
-        <FoodItem />
-        <button type="button">
-          <FaTrash />
-        </button>
-      </div>
-      <div className="food-container">
-        <FoodItem />
-        <button type="button">
-          <FaTrash />
-        </button>
-      </div>
-    </section>
+    <>
+      <section className="food-list">
+        <div className="food-container">
+          <FoodItem />
+          <FoodSideDeleteButton handleDelete={handleDelete} />
+        </div>
+        <div className="food-container">
+          <FoodItem />
+          <FoodSideDeleteButton handleDelete={handleDelete} />
+        </div>
+        <div className="food-container">
+          <FoodItem />
+          <FoodSideDeleteButton handleDelete={handleDelete} />
+        </div>
+        <div className="food-container">
+          <FoodItem />
+          <FoodSideDeleteButton handleDelete={handleDelete} />
+        </div>
+        <div className="food-container">
+          <FoodItem />
+          <FoodSideDeleteButton handleDelete={handleDelete} />
+        </div>
+      </section>
+    </>
   );
 };
 

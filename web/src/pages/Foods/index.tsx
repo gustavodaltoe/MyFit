@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { FaPlusCircle, FaTrash } from 'react-icons/fa';
+import { FaPlusCircle } from 'react-icons/fa';
 import FoodItem from '../../components/FoodItem';
 import Header from '../../components/Header';
 import Modal from '../../components/Modal';
 import NewFoodModalContent from '../../components/NewFoodModalContent';
 import SearchFood from '../../components/SearchFood';
+import FoodSideDeleteButton from '../../components/FoodSideDeleteButton';
 
 import './styles.scss';
 
@@ -21,6 +22,8 @@ function Foods() {
     setIsModalOpen(false);
   };
 
+  const handleDelete = () => {};
+
   return (
     <main id="foods">
       <Header />
@@ -32,33 +35,23 @@ function Foods() {
         </header>
         <div className="food-container">
           <FoodItem />
-          <button type="button">
-            <FaTrash />
-          </button>
+          <FoodSideDeleteButton handleDelete={handleDelete} />
         </div>
         <div className="food-container">
           <FoodItem />
-          <button type="button">
-            <FaTrash />
-          </button>
+          <FoodSideDeleteButton handleDelete={handleDelete} />
         </div>
         <div className="food-container">
           <FoodItem />
-          <button type="button">
-            <FaTrash />
-          </button>
+          <FoodSideDeleteButton handleDelete={handleDelete} />
         </div>
         <div className="food-container">
           <FoodItem />
-          <button type="button">
-            <FaTrash />
-          </button>
+          <FoodSideDeleteButton handleDelete={handleDelete} />
         </div>
         <div className="food-container">
           <FoodItem />
-          <button type="button">
-            <FaTrash />
-          </button>
+          <FoodSideDeleteButton handleDelete={handleDelete} />
         </div>
       </section>
 
