@@ -1,5 +1,10 @@
 import { Exclude } from 'class-transformer';
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 export default class User {
@@ -16,21 +21,24 @@ export default class User {
   @Column()
   name: string;
 
-  @Column()
+  @Column('int')
   height: number;
 
-  @Column()
+  @Column('int')
   weight: number;
 
   @Column()
   gender: string;
 
-  @Column()
+  @Column({ name: 'physical_activity' })
   physicalActivity: string;
 
-  @Column()
+  @Column('int')
   age: number;
 
   @Column()
   goal: string;
+
+  @CreateDateColumn({ name: 'created_at' })
+  createdAt?: Date;
 }
