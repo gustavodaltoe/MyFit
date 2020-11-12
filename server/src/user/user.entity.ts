@@ -3,8 +3,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import Profile from './profile.entity';
 
 @Entity()
 export default class User {
@@ -18,27 +21,16 @@ export default class User {
   @Column()
   password: string;
 
-  @Column()
-  name: string;
+  @Column({ default: false })
+  verified: boolean;
 
-  @Column('int')
-  height: number;
-
-  @Column('int')
-  weight: number;
-
-  @Column()
-  gender: string;
-
-  @Column({ name: 'physical_activity' })
-  physicalActivity: string;
-
-  @Column('int')
-  age: number;
-
-  @Column()
-  goal: string;
+  @OneToOne(() => Profile, profile => profile.user, {
+    nullable: true,
+    cascade: true,
+  })
+  @JoinColumn()
+  profile?: Profile;
 
   @CreateDateColumn({ name: 'created_at' })
-  createdAt?: Date;
+  createdAt: Date;
 }
