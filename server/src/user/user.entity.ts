@@ -9,7 +9,7 @@ import {
 } from 'typeorm';
 import Profile from './profile.entity';
 
-@Entity()
+@Entity('users')
 export default class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
@@ -27,6 +27,7 @@ export default class User {
   @OneToOne(() => Profile, profile => profile.user, {
     nullable: true,
     cascade: true,
+    eager: true,
   })
   @JoinColumn()
   profile?: Profile;
