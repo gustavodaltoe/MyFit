@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { plainToClass } from 'class-transformer';
-import { CreateUserDto } from './dtos/create-user.dto';
+import { RegisterDto } from '../auth/dtos/register.dto';
 import User from './user.entity';
 
 @Injectable()
@@ -21,7 +21,7 @@ export class UserService {
     return this.userRepository.findOne({ email });
   }
 
-  async create(dto: CreateUserDto): Promise<User> {
+  async create(dto: RegisterDto): Promise<User> {
     const { email, password } = dto;
 
     const isEmailAvailable = await this.isEmailAvailable(email);
