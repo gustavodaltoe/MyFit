@@ -7,6 +7,7 @@ import {
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { EmailVerification } from '../auth/email-verification.entity';
 import Profile from './profile.entity';
 
 @Entity('users')
@@ -21,9 +22,6 @@ export default class User {
   @Column()
   password: string;
 
-  @Column({ default: false })
-  verified: boolean;
-
   @OneToOne(() => Profile, profile => profile.user, {
     nullable: true,
     cascade: true,
@@ -31,6 +29,21 @@ export default class User {
   })
   @JoinColumn()
   profile?: Profile;
+
+  @Exclude()
+  @Column({ name: 'email_verification_id', nullable: true })
+  emailVerificationId?: string;
+
+  @Exclude()
+  @OneToOne(() => EmailVerification, verification => verification.user, {
+    cascade: true,
+    nullable: true,
+  })
+  @JoinColumn({ name: 'email_verification_id' })
+  emailVerification?: EmailVerification;
+
+  @Column({ default: false })
+  verified: boolean;
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;
