@@ -1,5 +1,11 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import {
+  BrowserRouter,
+  Redirect,
+  Route,
+  RouteProps,
+  Switch,
+} from 'react-router-dom';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Confirmation from './pages/Confirmation';
@@ -7,18 +13,50 @@ import Questions from './pages/Questions';
 import Results from './pages/Results';
 import Principal from './pages/Principal';
 import Foods from './pages/Foods';
+import { useAuth } from './context/AuthContext';
+
+const PrivateRoute: React.FC<RouteProps> = (props) => {
+  const { isAuthenticated, user } = useAuth();
+
+  if (!isAuthenticated) {
+    return <Redirect to="/login" />;
+  }
+
+  const { path } = props;
+  if (!user.verified && path !== '/confirmation') {
+    return <Redirect to="/confirmation" />;
+  }
+  if (user.verified && !user.profile && path !== '/questions') {
+    return <Redirect to="/questions" />;
+  }
+
+  return <Route {...props} />;
+};
+
+const PublicRoute: React.FC<RouteProps> = (props) => {
+  const { isAuthenticated } = useAuth();
+  return isAuthenticated ? <Redirect to="/principal" /> : <Route {...props} />;
+};
 
 function Routes() {
+  const { isLoading } = useAuth();
+  if (isLoading) {
+    return <div>loading...</div>;
+  }
+
   return (
     <BrowserRouter>
-      <Route path="/" exact component={Login} />
-      <Route path="/login" component={Login} />
-      <Route path="/register" component={Register} />
-      <Route path="/confirmation" component={Confirmation} />
-      <Route path="/questions" component={Questions} />
-      <Route path="/results" component={Results} />
-      <Route path="/principal" component={Principal} />
-      <Route path="/foods" component={Foods} />
+      <Switch>
+        <PublicRoute path="/" exact component={Login} />
+        <PublicRoute path="/login" component={Login} />
+        <PublicRoute path="/register" component={Register} />
+
+        <PrivateRoute path="/confirmation" component={Confirmation} />
+        <PrivateRoute path="/questions" component={Questions} />
+        <PrivateRoute path="/results" component={Results} />
+        <PrivateRoute path="/foods" component={Foods} />
+        <PrivateRoute path="/principal" component={Principal} />
+      </Switch>
     </BrowserRouter>
   );
 }

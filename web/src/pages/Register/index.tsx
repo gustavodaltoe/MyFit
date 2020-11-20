@@ -1,8 +1,11 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import Input from '../../components/Input';
 import Base from '../../components/Base';
+import authService from '../../services/authService';
+import { useAuth } from '../../context/AuthContext';
 
 type Inputs = {
   email: string;
@@ -11,13 +14,32 @@ type Inputs = {
 };
 
 function Register() {
+  const { login } = useAuth();
   const { register, handleSubmit, watch, errors } = useForm<Inputs>();
-
-  const onSubmit = (data: Inputs) => {
-    console.log(data);
-  };
-
   const history = useHistory();
+
+  const onSubmit = async ({ email, password }: Inputs) => {
+    try {
+      await authService.register(email, password);
+
+      toast.success('✔ Usuário cadastrado com sucesso, olhe seu email!');
+
+      login(email, password)
+        .catch(() => {
+          toast.warning(`⚠ falha ao tentar entrar automaticamente`);
+        })
+        .finally(() => {
+          history.push('/confirmation');
+        });
+    } catch (err) {
+      console.error(err.response.data || err.message);
+      const errorMessage =
+        err.response.data.message ||
+        'Oops, failed to register, try again later.';
+
+      toast.error(`⚠ ${errorMessage}`);
+    }
+  };
 
   return (
     <Base>

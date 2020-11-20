@@ -21,11 +21,16 @@
 			display: flex;
 			align-items: center;
 			justify-content: space-around;
-			margin: 3rem auto 0;
 		}
 		&:hover {
 			background-color: #6e6d6e;
 			color: #E1E1E1;
 		}
+	}
+	form {
+		display: flex;
+		flex-direction: column;
+		margin: 3rem auto 0;
+		justify-content: flex-end;
 	}
 }

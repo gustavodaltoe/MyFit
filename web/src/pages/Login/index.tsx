@@ -1,8 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import Base from '../../components/Base';
 import Input from '../../components/Input';
+import { useAuth } from '../../context/AuthContext';
 
 type Inputs = {
   email: string;
@@ -10,10 +12,21 @@ type Inputs = {
 };
 
 function Login() {
+  const { login } = useAuth();
   const { register, handleSubmit, errors } = useForm<Inputs>();
 
-  const onSubmit = (data: Inputs) => {
-    console.log(data);
+  const onSubmit = async ({ email, password }: Inputs) => {
+    try {
+      await login(email, password);
+    } catch (err) {
+      console.error(err.response.data || err.message);
+      const isUnauthorized = err.response.status === 401;
+      if (isUnauthorized) {
+        toast.error('🔒 email ou senha incorretos.');
+      } else {
+        toast.error('Ocorreu um erro, tente novamente mais tarde.');
+      }
+    }
   };
 
   const history = useHistory();

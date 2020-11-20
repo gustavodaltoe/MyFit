@@ -78,6 +78,25 @@
 	.font-yellow {
 		color: var(--color-yellow);
 	}
+
+	.buttons-container {
+		display: flex;
+		justify-content: space-between;
+
+		a {
+			width: 45%;
+		}
+
+		button {
+			width: 45%;
+			margin: 1rem auto;
+			border-radius: .5rem;
+			font-size: 2.2rem;
+			transition: .2s ease;
+			cursor: pointer;
+			background-color: var(--color-text-gray);
+		}
+	}
 }
 
 @media (min-width: 1000px) {

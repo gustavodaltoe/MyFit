@@ -36,6 +36,7 @@ module.exports = {
         endOfLine: 'auto',
       },
     ],
+    "class-methods-use-this": "off",
     "react/require-default-props": 'off',
     "react/prop-types": 'off',
     "import/no-extraneous-dependencies": ["error", {"devDependencies": true}],

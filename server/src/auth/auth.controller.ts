@@ -3,6 +3,7 @@ import {
   Controller,
   Get,
   Param,
+  Patch,
   Post,
   Request,
   Response,
@@ -54,7 +55,7 @@ export class AuthController {
     resp.status(204).send();
   }
 
-  @Get('email/verify/:token')
+  @Patch('email/verify/:token')
   async verifyEmail(@Param() params, @Response() resp): Promise<void> {
     await this.authService.verifyEmail(params.token);
     resp.status(204).send();

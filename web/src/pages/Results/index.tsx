@@ -3,10 +3,13 @@ import React from 'react';
 import { FaFire, FaEgg, FaTint, FaBurn } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import Base from '../../components/Base';
+import { useAuth } from '../../context/AuthContext';
 
 import './styles.scss';
 
 function Results() {
+  const { logout } = useAuth();
+
   return (
     <Base>
       <div id="results">
@@ -63,9 +66,14 @@ function Results() {
           </div>
         </div>
 
-        <Link className="btn-green" to="/principal">
-          Continuar
-        </Link>
+        <div className="buttons-container">
+          <Link className="btn-green" to="/principal">
+            Continuar
+          </Link>
+          <button type="button" onClick={logout}>
+            Sair
+          </button>
+        </div>
       </div>
     </Base>
   );

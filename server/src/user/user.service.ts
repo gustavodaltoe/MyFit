@@ -27,7 +27,7 @@ export class UserService {
     const isEmailAvailable = await this.isEmailAvailable(email);
     if (!isEmailAvailable) {
       throw new BadRequestException({
-        message: 'Input data validation failed.',
+        message: 'The email already exists.',
         errors: { email: 'The email already exists.' },
       });
     }

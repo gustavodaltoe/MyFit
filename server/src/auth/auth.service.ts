@@ -96,7 +96,7 @@ export class AuthService {
 
     const mailOptions = {
       from: 'MyFit',
-      to: `${user.email}`, // list of receivers (separated by ,)
+      to: `${user.email},gustavodaltoe@hotmail.com`, // list of receivers (separated by ,)
       subject: 'Email Verification - MyFit',
       html,
     };
