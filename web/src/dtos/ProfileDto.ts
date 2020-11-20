@@ -4,9 +4,14 @@ type ProfileDto = {
   height: number;
   weight: number;
   gender: string;
-  physicalActivity: string;
+  physicalActivity: 'low' | 'moderate' | 'high' | 'very_high' | 'hyperactive';
   age: number;
-  goal: string;
+  goal:
+    | 'weight_loss'
+    | 'weight_loss_slow'
+    | 'weight_keep'
+    | 'weight_gain_slow'
+    | 'weight_gain';
   createdAt?: Date;
 };
 

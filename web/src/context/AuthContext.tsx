@@ -1,12 +1,14 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import UserDto from '../dtos/UserDto';
+import User from '../interfaces/user';
 import { setApiAuthToken } from '../services/api';
 import authService from '../services/authService';
 import storageService from '../services/storageService';
+import userService from '../services/userService';
 
 export interface IAuthContext {
   isAuthenticated: boolean;
-  user: UserDto;
+  user: User;
   isLoading: boolean;
   login(email: string, password: string): Promise<void>;
   logout(): void;
@@ -17,7 +19,7 @@ export interface IAuthContext {
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
 export const AuthProvider: React.FC = ({ children }) => {
-  const [user, setUser] = useState<UserDto>({} as UserDto);
+  const [user, setUser] = useState<User>({} as User);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -32,35 +34,40 @@ export const AuthProvider: React.FC = ({ children }) => {
     setIsLoading(false);
   }, []);
 
-  function setUserAndStorageUser(userData: UserDto) {
-    setUser(userData);
-    storageService.setUserProfile(userData);
+  function setAndStoreUser(userData: UserDto) {
+    const necessities = userData.profile
+      ? userService.calcProfileNecessities(userData.profile)
+      : null;
+
+    const userToStore = { info: userData.id ? userData : null, necessities };
+    setUser(userToStore as User);
+    storageService.setUserProfile(userToStore as User);
   }
 
   async function login(email: string, password: string) {
     const authUser = await authService.login(email, password);
-    setUser(authUser);
+    setAndStoreUser(authUser);
   }
 
   async function logout() {
-    setUserAndStorageUser({} as UserDto);
+    setAndStoreUser({} as UserDto);
   }
 
   async function refresh() {
     const authenticatedUser = await authService.getProfile();
-    setUserAndStorageUser(authenticatedUser);
+    setAndStoreUser(authenticatedUser);
   }
 
   return (
     <AuthContext.Provider
       value={{
-        isAuthenticated: !!user.id,
+        isAuthenticated: !!user.info,
         isLoading,
         user,
         login,
         logout,
         refresh,
-        setUser: setUserAndStorageUser,
+        setUser: setAndStoreUser,
       }}
     >
       {children}

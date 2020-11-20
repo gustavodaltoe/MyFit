@@ -2,16 +2,23 @@ import React, { useState } from 'react';
 
 import './styles.scss';
 import { FaPlusCircle, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { Link, Redirect } from 'react-router-dom';
 import ProgressLinear from '../ProgressLinear';
 import FoodList from '../FoodList';
 import Modal from '../Modal';
 import FoodItem from '../FoodItem';
-import { Link } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 
 const Daily = () => {
+  const { user } = useAuth();
   const [quantity, setQuantity] = useState(1);
   const [item, setItem] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  if (!user.necessities) {
+    return <Redirect to="/profile/create" />;
+  }
+  const { calories, carbs, fat, proteins } = user.necessities;
 
   const handleFoodAddButtonClick = () => {
     setIsModalOpen(true);
@@ -46,19 +53,19 @@ const Daily = () => {
         <div className="macros">
           <div className="red">
             <p>Carboidratos</p>
-            <b>16/172 g</b>
+            <b>16/{carbs} g</b>
           </div>
           <div className="blue">
             <p>Proteína</p>
-            <b>16/172 g</b>
+            <b>16/{proteins} g</b>
           </div>
           <div className="yellow">
             <p>Gordura</p>
-            <b>10/66 g</b>
+            <b>10/{fat} g</b>
           </div>
         </div>
         <div className="progress blue">
-          <ProgressLinear current={536} total={1970} />
+          <ProgressLinear current={536} total={calories} />
         </div>
       </div>
 

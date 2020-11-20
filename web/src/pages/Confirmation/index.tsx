@@ -20,7 +20,7 @@ function Confirmation() {
 
   const onSubmit = async () => {
     try {
-      await authService.resendConfirmationEmail(user.email);
+      await authService.resendConfirmationEmail(user.info.email);
       toast.success('✔ Email reenviado com sucesso!');
     } catch (err) {
       if (err.response.data.message === 'LOGIN.EMAIL_SENT_RECENTLY') {

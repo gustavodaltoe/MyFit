@@ -22,13 +22,15 @@ const PrivateRoute: React.FC<RouteProps> = (props) => {
     return <Redirect to="/login" />;
   }
 
+  console.log(isAuthenticated);
+
   const { path } = props;
-  const isUserVerified = user.verified;
-  if (!isUserVerified && path !== '/confirmation') {
+  const isUserVerified = user.info.verified;
+  if (isAuthenticated && !isUserVerified && path !== '/confirmation') {
     return <Redirect to="/confirmation" />;
   }
 
-  const userHasNoProfile = user.profile === null;
+  const userHasNoProfile = user.info.profile === null;
   if (isUserVerified && userHasNoProfile && path !== '/profile/create') {
     return <Redirect to="/profile/create" />;
   }

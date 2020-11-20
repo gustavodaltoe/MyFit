@@ -8,7 +8,20 @@ import { useAuth } from '../../context/AuthContext';
 import './styles.scss';
 
 function Results() {
-  const { logout } = useAuth();
+  const { logout, user } = useAuth();
+
+  if (!user.info.profile || !user.necessities) {
+    return <div>loading...</div>;
+  }
+
+  const {
+    basalMetabolicRate,
+    calories,
+    carbs,
+    proteins,
+    fat,
+  } = user.necessities;
+  const { weight, height } = user.info.profile;
 
   return (
     <Base>
@@ -20,7 +33,7 @@ function Results() {
               <FaFire className="fa" />
               Taxa metábólica basal:
             </strong>
-            <span>1791 kcal</span>
+            <span>{basalMetabolicRate} kcal</span>
           </div>
 
           <div>
@@ -28,7 +41,7 @@ function Results() {
               <FaEgg className="fa" />
               Índice massa corporal:
             </strong>
-            <span>29.41</span>
+            <span>{(weight / (height / 100) ** 2).toFixed(2)}</span>
           </div>
 
           <div>
@@ -36,7 +49,7 @@ function Results() {
               <FaTint className="fa" />
               Requisitos de água:
             </strong>
-            <span>2750 ml</span>
+            <span>{35 * weight} ml</span>
           </div>
 
           <div>
@@ -44,25 +57,25 @@ function Results() {
               <FaBurn className="fa" />
               Requisitos calóricos diários:
             </strong>
-            <span>1970 kcal</span>
+            <span>{calories} kcal</span>
           </div>
         </div>
 
         <div className="macros">
           <div className="font-red">
             <span>Carboidratos</span>
-            <strong>172 g</strong>
-            <span>688 kcal</span>
+            <strong>{carbs} g</strong>
+            <span>{carbs * 4} kcal</span>
           </div>
           <div className="font-blue">
             <span>Proteína</span>
-            <strong>172 g</strong>
-            <span>688 kcal</span>
+            <strong>{proteins} g</strong>
+            <span>{proteins * 4} kcal</span>
           </div>
           <div className="font-yellow">
             <span>Gordura</span>
             <strong>66 g</strong>
-            <span>594 kcal</span>
+            <span>{fat * 9} kcal</span>
           </div>
         </div>
 

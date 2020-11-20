@@ -26,13 +26,8 @@ async function login(email: string, password: string): Promise<UserDto> {
   setApiAuthToken(data.accessToken);
 
   const authProfile = await getProfile();
-  storageService.setUserProfile(authProfile);
 
   return authProfile;
-}
-
-async function logout(): Promise<void> {
-  storageService.setAuthToken(null);
 }
 
 async function resendConfirmationEmail(email: string): Promise<void | string> {
@@ -50,7 +45,6 @@ export default {
   register,
   login,
   getProfile,
-  logout,
   verifyEmail,
   resendConfirmationEmail,
 };
