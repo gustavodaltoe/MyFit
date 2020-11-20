@@ -22,7 +22,6 @@ export const AuthProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const storageUser = storageService.getUserProfile();
     const storageToken = storageService.getAuthToken();
-    console.log(storageToken);
 
     if (storageUser && storageToken) {
       setUser(storageUser);
