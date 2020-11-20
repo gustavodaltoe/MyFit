@@ -11,6 +11,7 @@ export interface IAuthContext {
   login(email: string, password: string): Promise<void>;
   logout(): void;
   refresh(): void;
+  setUser(userData: UserDto): void;
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -31,19 +32,23 @@ export const AuthProvider: React.FC = ({ children }) => {
     setIsLoading(false);
   }, []);
 
+  function setUserAndStorageUser(userData: UserDto) {
+    setUser(userData);
+    storageService.setUserProfile(userData);
+  }
+
   async function login(email: string, password: string) {
     const authUser = await authService.login(email, password);
     setUser(authUser);
   }
 
   async function logout() {
-    storageService.clear();
-    setUser({} as UserDto);
+    setUserAndStorageUser({} as UserDto);
   }
 
   async function refresh() {
     const authenticatedUser = await authService.getProfile();
-    setUser(authenticatedUser);
+    setUserAndStorageUser(authenticatedUser);
   }
 
   return (
@@ -55,6 +60,7 @@ export const AuthProvider: React.FC = ({ children }) => {
         login,
         logout,
         refresh,
+        setUser: setUserAndStorageUser,
       }}
     >
       {children}

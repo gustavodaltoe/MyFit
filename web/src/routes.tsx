@@ -28,9 +28,13 @@ const PrivateRoute: React.FC<RouteProps> = (props) => {
     return <Redirect to="/confirmation" />;
   }
 
-  const userHasNoProfile = !user.profile;
+  const userHasNoProfile = user.profile === null;
   if (isUserVerified && userHasNoProfile && path !== '/profile/create') {
     return <Redirect to="/profile/create" />;
+  }
+
+  if (!userHasNoProfile && path === '/profile/create') {
+    return <Redirect to="/principal" />;
   }
 
   return <Route {...props} />;
