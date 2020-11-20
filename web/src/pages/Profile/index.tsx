@@ -73,7 +73,7 @@ type Inputs = {
   objective: string;
 };
 
-function Questions() {
+function Profile() {
   const { register, handleSubmit, errors } = useForm<Inputs>();
 
   const onSubmit = (data: Inputs) => {
@@ -82,7 +82,7 @@ function Questions() {
 
   return (
     <Base>
-      <form id="questions" onSubmit={handleSubmit(onSubmit)}>
+      <form id="profile" onSubmit={handleSubmit(onSubmit)}>
         <fieldset>
           <legend>Precisamos só de mais algumas informações</legend>
           <Input
@@ -152,4 +152,4 @@ function Questions() {
   );
 }
 
-export default Questions;
+export default Profile;
