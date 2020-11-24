@@ -24,9 +24,14 @@ async function addFoodToUser(foodId: number): Promise<void> {
   await api.patch(`/api/user/foods/${foodId}`);
 }
 
+async function removeFoodFromUser(foodId: number): Promise<void> {
+  await api.delete(`/api/user/foods/${foodId}`);
+}
+
 export default {
   createFood,
   list,
   search,
   addFoodToUser,
+  removeFoodFromUser,
 };

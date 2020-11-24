@@ -43,6 +43,8 @@ const Daily = () => {
 
   const handleFoodModalClose = () => {
     setIsModalOpen(false);
+    setSelectedFood(null);
+    setQuantity(1);
   };
 
   function handleAmountChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -130,56 +132,54 @@ const Daily = () => {
         <FoodList />
       </div>
 
-      <Modal
-        title="Adicionar Alimento"
-        isOpen={isModalOpen}
-        handleClose={handleFoodModalClose}
-      >
-        <Link to="/foods">
-          <FaPlusCircle className="icon" />
-        </Link>
-        <section className="content">
-          <div className="food-list">
-            {foodList.map((food) => (
-              <button
-                key={food.id}
-                type="button"
-                className={`select-food ${
-                  selectedFood && food.id === selectedFood.id ? 'selected' : ''
-                }`}
-                onClick={() => {
-                  if (selectedFood && selectedFood.id === food.id) {
-                    return setSelectedFood(null);
-                  }
-                  return setSelectedFood(food);
-                }}
-              >
-                <FoodItem food={food} />
+      {isModalOpen && (
+        <Modal title="Adicionar Alimento" handleClose={handleFoodModalClose}>
+          <Link to="/foods">
+            <FaPlusCircle className="icon" />
+          </Link>
+          <section className="content">
+            <div className="food-list">
+              {foodList.map((food) => (
+                <button
+                  key={food.id}
+                  type="button"
+                  className={`select-food ${
+                    selectedFood && food.id === selectedFood.id
+                      ? 'selected'
+                      : ''
+                  }`}
+                  onClick={() => {
+                    if (selectedFood && selectedFood.id === food.id) {
+                      return setSelectedFood(null);
+                    }
+                    return setSelectedFood(food);
+                  }}
+                >
+                  <FoodItem food={food} />
+                </button>
+              ))}
+            </div>
+          </section>
+          <footer>
+            <div>
+              <input
+                type="number"
+                value={quantity}
+                onChange={handleAmountChange}
+              />
+              <span>Unidades</span>
+            </div>
+            <div>
+              <button type="button" className="add" disabled={!selectedFood}>
+                Adicionar
               </button>
-            ))}
-          </div>
-        </section>
-        <footer>
-          <div>
-            <input
-              type="number"
-              value={quantity}
-              onChange={
-                handleAmountChange /* (e) => setQuantity(e.target.value) */
-              }
-            />
-            <span>Unidades</span>
-          </div>
-          <div>
-            <button type="button" className="add">
-              Adicionar
-            </button>
-            <button type="button" onClick={handleFoodModalClose}>
-              Fechar
-            </button>
-          </div>
-        </footer>
-      </Modal>
+              <button type="button" onClick={handleFoodModalClose}>
+                Fechar
+              </button>
+            </div>
+          </footer>
+        </Modal>
+      )}
     </section>
   );
 };

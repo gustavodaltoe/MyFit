@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Param,
   Patch,
@@ -47,5 +48,11 @@ export class FoodController {
   ): Promise<void> {
     await this.foodService.attachToUser(req.user.userId, params.foodId);
     res.status(204).send();
+  }
+
+  @Delete('user/foods/:foodId')
+  @UseGuards(JwtAuthGuard)
+  async detachFromUser(@Request() req, @Param() params): Promise<void> {
+    await this.foodService.detachFromUser(req.user.userId, params.foodId);
   }
 }

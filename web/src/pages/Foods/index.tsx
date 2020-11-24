@@ -13,7 +13,7 @@ import FoodDto from '../../dtos/FoodDto';
 import foodService from '../../services/foodService';
 
 function Foods() {
-  const [foods, setFoods] = useState([] as FoodDto[]);
+  const [foods, setFoods] = useState<FoodDto[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalIndex, setModalIndex] = useState(0);
   const modalTitles = ['Selecione', 'Cadastrar Novo', 'Pesquisar Alimento'];
@@ -36,9 +36,18 @@ function Foods() {
 
   const handleFoodModalClose = () => {
     setIsModalOpen(false);
+    setModalIndex(0);
   };
 
-  const handleDelete = () => {};
+  async function handleDelete(foodToDelete: FoodDto) {
+    try {
+      if (!foodToDelete.id) return;
+      await foodService.removeFoodFromUser(foodToDelete.id);
+      setFoods(foods.filter((food) => food.id !== foodToDelete.id));
+    } catch (err) {
+      toast.error('Erro ao excluir o alimento.');
+    }
+  }
 
   return (
     <main id="foods">
@@ -52,7 +61,7 @@ function Foods() {
         {foods.map((food) => (
           <div key={food.id} className="food-container">
             <FoodItem food={food} />
-            <FoodSideDeleteButton handleDelete={handleDelete} />
+            <FoodSideDeleteButton handleDelete={() => handleDelete(food)} />
           </div>
         ))}
       </section>
@@ -61,36 +70,37 @@ function Foods() {
         <FaPlusCircle size={60} />
       </button>
 
-      <Modal
-        title={modalTitles[modalIndex]}
-        isOpen={isModalOpen}
-        handleClose={handleFoodModalClose}
-      >
-        {modalIndex === 0 && (
-          <section className="content">
-            <button type="button" onClick={() => setModalIndex(1)}>
-              <span>Cadastrar novo</span>
-            </button>
-            <button type="button" onClick={() => setModalIndex(2)}>
-              <span>Pesquisar alimentos</span>
-            </button>
-          </section>
-        )}
-        {modalIndex === 1 && (
-          <NewFoodModalContent
-            handleBackClick={() => {
-              setModalIndex(0);
-            }}
-          />
-        )}
-        {modalIndex === 2 && (
-          <SearchFood
-            handleBackClick={() => {
-              setModalIndex(0);
-            }}
-          />
-        )}
-      </Modal>
+      {isModalOpen && (
+        <Modal
+          title={modalTitles[modalIndex]}
+          handleClose={handleFoodModalClose}
+        >
+          {modalIndex === 0 && (
+            <section className="content">
+              <button type="button" onClick={() => setModalIndex(1)}>
+                <span>Cadastrar novo</span>
+              </button>
+              <button type="button" onClick={() => setModalIndex(2)}>
+                <span>Pesquisar alimentos</span>
+              </button>
+            </section>
+          )}
+          {modalIndex === 1 && (
+            <NewFoodModalContent
+              handleBackClick={() => {
+                setModalIndex(0);
+              }}
+            />
+          )}
+          {modalIndex === 2 && (
+            <SearchFood
+              handleBackClick={() => {
+                setModalIndex(0);
+              }}
+            />
+          )}
+        </Modal>
+      )}
     </main>
   );
 }

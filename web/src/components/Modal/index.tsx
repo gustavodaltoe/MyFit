@@ -4,7 +4,6 @@ import { FaTimes } from 'react-icons/fa';
 import './styles.scss';
 
 interface IProps {
-  isOpen: boolean;
   title: string;
   handleClose(): void;
 }
@@ -13,7 +12,7 @@ const Modal: React.FC<IProps> = memo((props) => {
   const handleCloseClick = useCallback(() => props.handleClose(), [props]);
 
   return (
-    <section className={`modal ${props.isOpen ? 'active' : ''}`}>
+    <section className="modal">
       <div className="container">
         <button type="button" onClick={handleCloseClick}>
           <FaTimes />

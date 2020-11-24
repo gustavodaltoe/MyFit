@@ -1,15 +1,12 @@
 .modal {
   & {
-    display: none;
+    display: flex;
     position: fixed;
     left: 0;
     top: 0;
     width: 100%;
     background: rgba(0,0,0,0.5);
     height: 100vh;
-  }
-  &.active {
-    display: flex;
   }
   
   .container {

@@ -63,6 +63,10 @@
 
         &.add {
           background-color: var(--color-green);
+          
+          &:disabled {
+            background-color: rgb(70, 70, 70);
+          }
         }
 
         &:hover {

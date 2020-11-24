@@ -1,4 +1,4 @@
-import { Injectable, InternalServerErrorException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import User from '../user/user.entity';
@@ -41,7 +41,7 @@ export class FoodService {
     return this.foodRepository.save(food);
   }
 
-  async attachToUser(userId: string, foodId: string): Promise<void> {
+  async attachToUser(userId: string, foodId: number): Promise<void> {
     const authUser = await this.userRepository.findOneOrFail(userId);
 
     const food = await this.foodRepository.findOneOrFail(foodId, {
@@ -57,6 +57,18 @@ export class FoodService {
 
     food.users = [...food.users, authUser];
     food.popularity += 1;
+    await this.foodRepository.save(food);
+  }
+
+  async detachFromUser(userId: string, foodId: number): Promise<void> {
+    const authUser = await this.userRepository.findOneOrFail(userId);
+
+    const food = await this.foodRepository.findOneOrFail(foodId, {
+      relations: ['users'],
+    });
+
+    food.users = food.users.filter(user => user.id !== authUser.id);
+    food.popularity -= 1;
     await this.foodRepository.save(food);
   }
 }
