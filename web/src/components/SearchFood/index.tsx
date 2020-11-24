@@ -1,5 +1,10 @@
-import React, { FormEvent, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
 import { FaSearch, FaSpinner } from 'react-icons/fa';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import FoodDto from '../../dtos/FoodDto';
+import foodService from '../../services/foodService';
 import FoodItem from '../FoodItem';
 import Input from '../Input';
 
@@ -9,20 +14,59 @@ interface IProps {
   handleBackClick(): void;
 }
 
-const SearchFood: React.FC<IProps> = ({ handleBackClick }) => {
-  const [isLoading, setIsLoading] = useState(false);
+interface Inputs {
+  search: string;
+}
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
-    setIsLoading(!isLoading);
-    console.log('enviei');
-  };
+const SearchFood: React.FC<IProps> = ({ handleBackClick }) => {
+  const { register, handleSubmit } = useForm<Inputs>();
+  const [foods, setFoods] = useState<FoodDto[]>([]);
+  const [search, setSearch] = useState<string>();
+  const [selectedFood, setSelectedFood] = useState<FoodDto | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const history = useHistory();
+
+  useEffect(() => {
+    setIsLoading(true);
+    (async () => {
+      try {
+        const foodSearch = await foodService.search(search);
+        setFoods(foodSearch);
+      } catch (err) {
+        console.error(err);
+        toast.error('Falha ao buscar alimentos.');
+      } finally {
+        setIsLoading(false);
+      }
+    })();
+  }, [search]);
+
+  function onSubmit(inputs: Inputs) {
+    setSearch(inputs.search);
+  }
+
+  async function addFood(): Promise<void> {
+    try {
+      if (!selectedFood || !selectedFood.id) {
+        return;
+      }
+
+      await foodService.addFoodToUser(selectedFood.id);
+      toast.dark('Alimento adicionado na sua lista.');
+
+      history.push('/principal');
+    } catch (err) {
+      console.error(err);
+      toast.error('Falha ao tentar adicionar o alimento.');
+    }
+  }
 
   return (
     <>
       <section id="search-food">
-        <form onSubmit={handleSubmit}>
-          <Input name="search" />
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Input name="search" ref={register()} />
           <button type="submit">
             <FaSearch />
           </button>
@@ -32,30 +76,25 @@ const SearchFood: React.FC<IProps> = ({ handleBackClick }) => {
             <FaSpinner size={60} className="icon-spin" />
           ) : (
             <>
-              <button type="button" className="select-food">
-                <FoodItem />
-              </button>
-              <button type="button" className="select-food">
-                <FoodItem />
-              </button>
-              <button
-                type="button"
-                className={`select-food ${1 === 1 ? 'selected' : ''}`}
-              >
-                <FoodItem />
-              </button>
-              <button type="button" className="select-food">
-                <FoodItem />
-              </button>
-              <button type="button" className="select-food">
-                <FoodItem />
-              </button>
-              <button type="button" className="select-food">
-                <FoodItem />
-              </button>
-              <button type="button" className="select-food">
-                <FoodItem />
-              </button>
+              {foods.map((food) => (
+                <button
+                  key={food.id}
+                  type="button"
+                  className={`select-food ${
+                    selectedFood && food.id === selectedFood.id
+                      ? 'selected'
+                      : ''
+                  }`}
+                  onClick={() => {
+                    if (selectedFood && selectedFood.id === food.id) {
+                      return setSelectedFood(null);
+                    }
+                    return setSelectedFood(food);
+                  }}
+                >
+                  <FoodItem food={food} />
+                </button>
+              ))}
             </>
           )}
         </div>
@@ -65,7 +104,12 @@ const SearchFood: React.FC<IProps> = ({ handleBackClick }) => {
         <button type="button" className="btn-back" onClick={handleBackClick}>
           Voltar
         </button>
-        <button type="button" className="btn-green">
+        <button
+          type="button"
+          className="btn-green"
+          onClick={addFood}
+          disabled={!selectedFood}
+        >
           Adicionar
         </button>
       </footer>

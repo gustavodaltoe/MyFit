@@ -9,8 +9,8 @@ import { AuthModule } from './auth/auth.module';
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot(),
-    UserModule,
     FoodModule,
+    UserModule,
     AuthModule,
   ],
 })

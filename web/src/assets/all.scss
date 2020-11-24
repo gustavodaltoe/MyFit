@@ -115,6 +115,9 @@ legend {
   &:hover {
     background-color: var(--color-green-dark);
   }
+  &:disabled {
+    background: rgb(112, 112, 112);
+  }
 }
 
 .red {

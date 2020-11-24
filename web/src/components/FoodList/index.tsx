@@ -12,7 +12,7 @@ const FoodList = () => {
   return (
     <>
       <section className="food-list">
-        <div className="food-container">
+        {/* <div className="food-container">
           <FoodItem />
           <FoodSideDeleteButton handleDelete={handleDelete} />
         </div>
@@ -31,7 +31,7 @@ const FoodList = () => {
         <div className="food-container">
           <FoodItem />
           <FoodSideDeleteButton handleDelete={handleDelete} />
-        </div>
+        </div> */}
       </section>
     </>
   );

@@ -4,9 +4,12 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import Food from '../food/food.entity';
 import { EmailVerification } from '../auth/email-verification.entity';
 import Profile from './profile.entity';
 
@@ -44,6 +47,10 @@ export default class User {
 
   @Column({ default: false })
   verified: boolean;
+
+  @ManyToMany(() => Food, food => food.users)
+  @JoinTable()
+  foods: Food[];
 
   @CreateDateColumn({ name: 'created_at' })
   createdAt: Date;

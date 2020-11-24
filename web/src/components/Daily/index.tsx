@@ -1,23 +1,40 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import './styles.scss';
 import { FaPlusCircle, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { Link, Redirect } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import ProgressLinear from '../ProgressLinear';
 import FoodList from '../FoodList';
 import Modal from '../Modal';
 import FoodItem from '../FoodItem';
 import { useAuth } from '../../context/AuthContext';
+import FoodDto from '../../dtos/FoodDto';
+import foodService from '../../services/foodService';
 
 const Daily = () => {
   const { user } = useAuth();
+  const [foodList, setFoodList] = useState<FoodDto[]>([]);
+  const [selectedFood, setSelectedFood] = useState<FoodDto | null>(null);
   const [quantity, setQuantity] = useState(1);
   const [item, setItem] = useState<number | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  useEffect(() => {
+    (async () => {
+      try {
+        const userFoodList = await foodService.list();
+        setFoodList(userFoodList);
+      } catch (err) {
+        toast.error('Falha ao tentar buscas os alimentos');
+      }
+    })();
+  }, []);
+
   if (!user.necessities) {
     return <Redirect to="/profile/create" />;
   }
+
   const { calories, carbs, fat, proteins } = user.necessities;
 
   const handleFoodAddButtonClick = () => {
@@ -123,42 +140,23 @@ const Daily = () => {
         </Link>
         <section className="content">
           <div className="food-list">
-            <button type="button" className="select-food">
-              <FoodItem />
-            </button>
-            <button type="button" className="select-food">
-              <FoodItem />
-            </button>
-            <button
-              type="button"
-              className={`select-food ${1 === 1 ? 'selected' : ''}`}
-            >
-              <FoodItem />
-            </button>
-            <button type="button" className="select-food">
-              <FoodItem />
-            </button>
-            <button type="button" className="select-food">
-              <FoodItem />
-            </button>
-            <button type="button" className="select-food">
-              <FoodItem />
-            </button>
-            <button type="button" className="select-food">
-              <FoodItem />
-            </button>
-            <button type="button" className="select-food">
-              <FoodItem />
-            </button>
-            <button type="button" className="select-food">
-              <FoodItem />
-            </button>
-            <button type="button" className="select-food">
-              <FoodItem />
-            </button>
-            <button type="button" className="select-food">
-              <FoodItem />
-            </button>
+            {foodList.map((food) => (
+              <button
+                key={food.id}
+                type="button"
+                className={`select-food ${
+                  selectedFood && food.id === selectedFood.id ? 'selected' : ''
+                }`}
+                onClick={() => {
+                  if (selectedFood && selectedFood.id === food.id) {
+                    return setSelectedFood(null);
+                  }
+                  return setSelectedFood(food);
+                }}
+              >
+                <FoodItem food={food} />
+              </button>
+            ))}
           </div>
         </section>
         <footer>

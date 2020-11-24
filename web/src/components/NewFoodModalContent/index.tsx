@@ -1,30 +1,51 @@
-import React from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import React, { useCallback, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import * as yup from 'yup';
+import FoodDto from '../../dtos/FoodDto';
+import foodService from '../../services/foodService';
 import Input from '../Input';
 
 import './styles.scss';
-
-type Inputs = {
-  name: string;
-  brand: string;
-  portion: number;
-  measureUnit: string;
-  calories: number;
-  carbo: number;
-  protein: number;
-  fat: number;
-};
 
 interface IProps {
   handleBackClick(): void;
 }
 
 const NewFoodModalContent: React.FC<IProps> = ({ handleBackClick }) => {
-  const { register, handleSubmit, watch, errors } = useForm<Inputs>();
+  const history = useHistory();
 
-  const onSubmit = (data: Inputs) => {
-    console.log(data);
-  };
+  const validationSchema = useMemo(
+    () =>
+      yup.object().shape({
+        name: yup.string().required(),
+        brand: yup.string().required(),
+        carbo: yup.number().min(0).required(),
+        protein: yup.number().min(0).required(),
+        fat: yup.number().min(0).required(),
+        calories: yup.number().positive().required(),
+        portion: yup.number().positive().required(),
+        unitMeasure: yup.string().required(),
+      }),
+    [],
+  );
+  const resolver = yupResolver<FoodDto>(validationSchema);
+  const { register, handleSubmit, errors } = useForm<FoodDto>({ resolver });
+
+  const onSubmit = useCallback(
+    async (data: FoodDto) => {
+      try {
+        await foodService.createFood(data);
+        toast.dark('Alimento adicionado na sua lista.');
+        history.push('/principal');
+      } catch (err) {
+        toast.error(err.message);
+      }
+    },
+    [history],
+  );
 
   return (
     <>
@@ -54,10 +75,10 @@ const NewFoodModalContent: React.FC<IProps> = ({ handleBackClick }) => {
                 className={errors.portion ? 'error' : ''}
               />
               <Input
-                name="measureUnit"
+                name="unitMeasure"
                 label="Unidade de medida"
                 ref={register({ required: true })}
-                className={errors.measureUnit ? 'error' : ''}
+                className={errors.unitMeasure ? 'error' : ''}
               />
             </div>
             <div className="input-group">
