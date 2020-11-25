@@ -25,7 +25,7 @@ function calcProfileNecessities(profile: ProfileDto): any {
   enum GoalsEn {
     weight_loss = 0.8,
     weight_loss_slow = 0.9,
-    weight_keep = 0,
+    weight_keep = 1,
     weight_gain_slow = 1.1,
     weight_gain = 1.2,
   }
