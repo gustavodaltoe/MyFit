@@ -9,6 +9,10 @@ interface IProps {
 }
 
 const FoodItem: React.FC<IProps> = ({ food, amount = 1 }) => {
+  function calcMacroTotal(value: number): number {
+    return Number((value * amount).toFixed(1));
+  }
+
   return (
     <div className="food-item">
       <div>
@@ -18,17 +22,17 @@ const FoodItem: React.FC<IProps> = ({ food, amount = 1 }) => {
         </span>
       </div>
       <div>
-        <span className="calories">{food.calories * amount}</span>
+        <span className="calories">{calcMacroTotal(food.calories)}</span>
         <div className="macros">
           <span>
-            C:<em className="red">{food.carbo * amount}</em>
+            C:<em className="red">{calcMacroTotal(food.carbo)}</em>
           </span>
           <span>
-            P:<em className="blue">{food.protein * amount}</em>
+            P:<em className="blue">{calcMacroTotal(food.protein)}</em>
           </span>
           <span>
             G:
-            <em className="yellow">{food.fat * amount}</em>
+            <em className="yellow">{calcMacroTotal(food.fat)}</em>
           </span>
         </div>
       </div>

@@ -145,24 +145,28 @@ const Daily = () => {
   }
 
   function calcTotalCalories(dailyFoodList: DailyFoodDto[]) {
-    return dailyFoodList.reduce((total, dailyFood) => {
-      return total + dailyFood.food.calories * dailyFood.amount;
+    const total = dailyFoodList.reduce((sum, dailyFood) => {
+      return sum + dailyFood.food.calories * dailyFood.amount;
     }, 0);
+    return Number(total.toFixed(1));
   }
   function calcTotalCarbo(dailyFoodList: DailyFoodDto[]) {
-    return dailyFoodList.reduce((total, dailyFood) => {
-      return total + dailyFood.food.carbo * dailyFood.amount;
+    const total = dailyFoodList.reduce((sum, dailyFood) => {
+      return sum + dailyFood.food.carbo * dailyFood.amount;
     }, 0);
+    return Number(total.toFixed(1));
   }
   function calcTotalProtein(dailyFoodList: DailyFoodDto[]) {
-    return dailyFoodList.reduce((total, dailyFood) => {
-      return total + dailyFood.food.protein * dailyFood.amount;
+    const total = dailyFoodList.reduce((sum, dailyFood) => {
+      return sum + dailyFood.food.protein * dailyFood.amount;
     }, 0);
+    return Number(total.toFixed(1));
   }
   function calcTotalFat(dailyFoodList: DailyFoodDto[]) {
-    return dailyFoodList.reduce((total, dailyFood) => {
-      return total + dailyFood.food.fat * dailyFood.amount;
+    const total = dailyFoodList.reduce((sum, dailyFood) => {
+      return sum + dailyFood.food.fat * dailyFood.amount;
     }, 0);
+    return Number(total.toFixed(1));
   }
 
   return (
