@@ -9,7 +9,7 @@ import { DailyFoodModule } from './daily-food/daily-food.module';
 @Module({
   imports: [
     ConfigModule.forRoot({ isGlobal: true }),
-    TypeOrmModule.forRoot(),
+    TypeOrmModule.forRoot({ autoLoadEntities: true }),
     FoodModule,
     UserModule,
     AuthModule,
