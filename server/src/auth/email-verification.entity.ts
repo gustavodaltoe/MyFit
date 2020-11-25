@@ -2,7 +2,7 @@ import { differenceInMinutes } from 'date-fns';
 import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
 import User from '../user/user.entity';
 
-@Entity('email-verification')
+@Entity('email_verification')
 export class EmailVerification {
   @PrimaryGeneratedColumn('uuid')
   token: string;

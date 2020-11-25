@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaSyncAlt } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
@@ -33,16 +33,18 @@ function Confirmation() {
     }
   };
 
-  const token = query.get('token');
-  if (token) {
-    authService
-      .verifyEmail(token)
-      .then(() => {
-        toast.success('✔ Email confirmado com sucesso!');
-        refresh();
-      })
-      .catch((err) => toast.error(`⚠ ${err}`));
-  }
+  useEffect(() => {
+    const token = query.get('token');
+    if (token) {
+      authService
+        .verifyEmail(token)
+        .then(() => {
+          toast.success('✔ Email confirmado com sucesso!');
+          refresh();
+        })
+        .catch((err) => toast.error(`⚠ ${err}`));
+    }
+  }, [refresh, query]);
 
   return (
     <Base>

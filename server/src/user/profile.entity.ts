@@ -7,7 +7,7 @@ import {
 } from 'typeorm';
 import User from './user.entity';
 
-@Entity({ name: 'user-profile' })
+@Entity({ name: 'user_profile' })
 export default class Profile {
   @PrimaryGeneratedColumn('uuid')
   id: string;

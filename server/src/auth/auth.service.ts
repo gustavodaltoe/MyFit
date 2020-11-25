@@ -58,14 +58,18 @@ export class AuthService {
       throw new ForbiddenException('REGISTER.EMAIL_NOT_FOUND');
     }
 
-    const emailVerificationSent = await this.emailVerificationRepository.findOne(
-      user.emailVerificationId,
-    );
-    if (emailVerificationSent.verified) {
-      throw new ForbiddenException('REGISTER.EMAIL_ALREADY_CONFIRMED');
-    }
-    if (emailVerificationSent.getEmailLifetimeInMinutes() < 5) {
-      throw new InternalServerErrorException('LOGIN.EMAIL_SENT_RECENTLY');
+    if (user.emailVerificationId) {
+      const emailVerificationSent = await this.emailVerificationRepository.findOne(
+        user.emailVerificationId,
+      );
+      if (emailVerificationSent) {
+        if (emailVerificationSent.verified) {
+          throw new ForbiddenException('REGISTER.EMAIL_ALREADY_CONFIRMED');
+        }
+        if (emailVerificationSent.getEmailLifetimeInMinutes() < 5) {
+          throw new InternalServerErrorException('LOGIN.EMAIL_SENT_RECENTLY');
+        }
+      }
     }
 
     const emailVerification = this.emailVerificationRepository.create({
@@ -84,6 +88,8 @@ export class AuthService {
     }
 
     const { user } = emailVerification;
+
+    console.log(user);
 
     const html = `
       <p>Hi!</p>

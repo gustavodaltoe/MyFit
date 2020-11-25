@@ -74,7 +74,7 @@ function Results() {
           </div>
           <div className="font-yellow">
             <span>Gordura</span>
-            <strong>66 g</strong>
+            <strong>{fat} g</strong>
             <span>{fat * 9} kcal</span>
           </div>
         </div>
