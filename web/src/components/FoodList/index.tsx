@@ -1,8 +1,5 @@
 import React from 'react';
-import { toast } from 'react-toastify';
 import DailyFoodDto from '../../dtos/DailyFoodDto';
-import FoodDto from '../../dtos/FoodDto';
-import dailyFoodService from '../../services/dailyFoodService';
 import FoodItem from '../FoodItem';
 import FoodSideDeleteButton from '../FoodSideDeleteButton';
 

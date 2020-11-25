@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaSearch, FaSpinner } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
