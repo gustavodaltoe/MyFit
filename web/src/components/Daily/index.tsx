@@ -10,6 +10,7 @@ import {
   isToday,
   isTomorrow,
   isYesterday,
+  startOfToday,
   subDays,
 } from 'date-fns';
 import ProgressLinear from '../ProgressLinear';
@@ -21,6 +22,7 @@ import FoodDto from '../../dtos/FoodDto';
 import foodService from '../../services/foodService';
 import DailyFoodDto from '../../dtos/DailyFoodDto';
 import dailyFoodService from '../../services/dailyFoodService';
+import CaloriesChart from '../CaloriesChart';
 
 const Daily = () => {
   const { user } = useAuth();
@@ -32,7 +34,7 @@ const Daily = () => {
   const [lunch, setLunch] = useState<DailyFoodDto[]>([]);
   const [dinner, setDinner] = useState<DailyFoodDto[]>([]);
   const [snacks, setSnacks] = useState<DailyFoodDto[]>([]);
-  const [date, setDate] = useState(new Date());
+  const [date, setDate] = useState(startOfToday());
   const [quantity, setQuantity] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -170,110 +172,117 @@ const Daily = () => {
   }
 
   return (
-    <section id="daily">
-      <header>
-        <button type="button" onClick={goToPreviousDate}>
-          <FaChevronLeft />
-        </button>
-        <h4>{getDayText()}</h4>
-        <button type="button" onClick={goToNextDate}>
-          <FaChevronRight />
-        </button>
-      </header>
+    <>
+      <section id="daily">
+        <header>
+          <button type="button" onClick={goToPreviousDate}>
+            <FaChevronLeft />
+          </button>
+          <h4>{getDayText()}</h4>
+          <button type="button" onClick={goToNextDate}>
+            <FaChevronRight />
+          </button>
+        </header>
 
-      <div className="resume">
-        <div className="macros">
-          <div className="red">
-            <p>Carboidratos</p>
-            <b>
-              {calcTotalCarbo(dailyFoods)}/{carbs} g
-            </b>
+        <div className="resume">
+          <div className="macros">
+            <div className="red">
+              <p>Carboidratos</p>
+              <b>
+                {calcTotalCarbo(dailyFoods)}/{carbs} g
+              </b>
+            </div>
+            <div className="blue">
+              <p>Proteína</p>
+              <b>
+                {calcTotalProtein(dailyFoods)}/{proteins} g
+              </b>
+            </div>
+            <div className="yellow">
+              <p>Gordura</p>
+              <b>
+                {calcTotalFat(dailyFoods)}/{fat} g
+              </b>
+            </div>
           </div>
-          <div className="blue">
-            <p>Proteína</p>
-            <b>
-              {calcTotalProtein(dailyFoods)}/{proteins} g
-            </b>
-          </div>
-          <div className="yellow">
-            <p>Gordura</p>
-            <b>
-              {calcTotalFat(dailyFoods)}/{fat} g
-            </b>
+          <div className="progress blue">
+            <ProgressLinear
+              current={calcTotalCalories(dailyFoods)}
+              total={calories}
+            />
           </div>
         </div>
-        <div className="progress blue">
-          <ProgressLinear
-            current={calcTotalCalories(dailyFoods)}
-            total={calories}
-          />
+
+        <header className="period">
+          <button
+            type="button"
+            onClick={() => handleFoodAddButtonClick('breakfast')}
+          >
+            <FaPlusCircle />
+          </button>
+          <span>Café da manhã</span>
+          <b>
+            {calcTotalCalories(breakfast)}
+            kcal
+          </b>
+        </header>
+        <div className="entry">
+          <FoodList dailyFoods={breakfast} handleDelete={handleDelete} />
         </div>
-      </div>
 
-      <header className="period">
-        <button
-          type="button"
-          onClick={() => handleFoodAddButtonClick('breakfast')}
-        >
-          <FaPlusCircle />
-        </button>
-        <span>Café da manhã</span>
-        <b>
-          {calcTotalCalories(breakfast)}
-          kcal
-        </b>
-      </header>
-      <div className="entry">
-        <FoodList dailyFoods={breakfast} handleDelete={handleDelete} />
-      </div>
+        <header className="period">
+          <button
+            type="button"
+            onClick={() => handleFoodAddButtonClick('lunch')}
+          >
+            <FaPlusCircle />
+          </button>
+          <span>Almoço</span>
+          <b>
+            {calcTotalCalories(lunch)}
+            kcal
+          </b>
+        </header>
+        <div className="entry">
+          <FoodList dailyFoods={lunch} handleDelete={handleDelete} />
+        </div>
 
-      <header className="period">
-        <button type="button" onClick={() => handleFoodAddButtonClick('lunch')}>
-          <FaPlusCircle />
-        </button>
-        <span>Almoço</span>
-        <b>
-          {calcTotalCalories(lunch)}
-          kcal
-        </b>
-      </header>
-      <div className="entry">
-        <FoodList dailyFoods={lunch} handleDelete={handleDelete} />
-      </div>
+        <header className="period">
+          <button
+            type="button"
+            onClick={() => handleFoodAddButtonClick('dinner')}
+          >
+            <FaPlusCircle />
+          </button>
+          <span>Janta</span>
+          <b>
+            {calcTotalCalories(dinner)}
+            kcal
+          </b>
+        </header>
+        <div className="entry">
+          <FoodList dailyFoods={dinner} handleDelete={handleDelete} />
+        </div>
 
-      <header className="period">
-        <button
-          type="button"
-          onClick={() => handleFoodAddButtonClick('dinner')}
-        >
-          <FaPlusCircle />
-        </button>
-        <span>Janta</span>
-        <b>
-          {calcTotalCalories(dinner)}
-          kcal
-        </b>
-      </header>
-      <div className="entry">
-        <FoodList dailyFoods={dinner} handleDelete={handleDelete} />
-      </div>
+        <header className="period">
+          <button
+            type="button"
+            onClick={() => handleFoodAddButtonClick('snacks')}
+          >
+            <FaPlusCircle />
+          </button>
+          <span>Lanches</span>
+          <b>
+            {calcTotalCalories(snacks)}
+            kcal
+          </b>
+        </header>
+        <div className="entry">
+          <FoodList dailyFoods={snacks} handleDelete={handleDelete} />
+        </div>
+      </section>
 
-      <header className="period">
-        <button
-          type="button"
-          onClick={() => handleFoodAddButtonClick('snacks')}
-        >
-          <FaPlusCircle />
-        </button>
-        <span>Lanches</span>
-        <b>
-          {calcTotalCalories(snacks)}
-          kcal
-        </b>
-      </header>
-      <div className="entry">
-        <FoodList dailyFoods={snacks} handleDelete={handleDelete} />
-      </div>
+      <CaloriesChart todayDailyFoods={dailyFoods} />
 
       {isModalOpen && (
         <Modal title="Adicionar Alimento" handleClose={handleFoodModalClose}>
@@ -328,7 +337,7 @@ const Daily = () => {
           </footer>
         </Modal>
       )}
-    </section>
+    </>
   );
 };
 

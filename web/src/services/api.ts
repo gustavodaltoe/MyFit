@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: process.env.REACT_APP_SERVER_BASE_URL || 'http://localhost:3333',
+  baseURL:
+    process.env.REACT_APP_SERVER_BASE_URL || 'https://my-fit.herokuapp.com',
 });
 
 export function setApiAuthToken(token: string): void {

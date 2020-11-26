@@ -1,6 +1,7 @@
 import React from 'react';
 import Daily from '../../components/Daily';
 import Header from '../../components/Header';
+import CaloriesChart from '../../components/CaloriesChart';
 
 import './styles.scss';
 

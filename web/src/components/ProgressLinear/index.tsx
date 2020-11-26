@@ -15,7 +15,7 @@ const ProgressLinear: React.FC<IProps> = memo(({ current, total }: IProps) => {
       <div className="bar">
         <div className="fill" style={{ width: `${fillWidth}%` }} />
       </div>
-      <p>{`${current < total ? current : 100}/${total} kcal`}</p>
+      <p>{`${current}/${total} kcal`}</p>
     </>
   );
 });
